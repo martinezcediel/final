@@ -19,9 +19,54 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Limites de Tablero
+        if(transform.position.x < -5.5)
+        {
+            transform.position = new Vector3(-5.5f, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x > 5.5)
+        {
+            transform.position = new Vector3(5.5f, transform.position.y, transform.position.z);
+        }
+        if (transform.position.z < -0.5)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -0.5f);
+        }
+        if (transform.position.z > 17.5)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 17.5f);
+        }
+
+        //Movimiento del Personaje
         if (!isMoving && Input.GetKeyDown(KeyCode.UpArrow))
         {
+            Vector3 RotForward = new Vector3(-90f, 0f, 0f);
+            transform.rotation = Quaternion.Euler(RotForward);
             targetPos = transform.position + totalDistance * Vector3.forward;
+            StartCoroutine(Move(targetPos, totalSeconds));
+        }
+
+        if (!isMoving && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Vector3 RotBack = new Vector3(-90f, 0f, 180f);
+            transform.rotation = Quaternion.Euler(RotBack);
+            targetPos = transform.position + totalDistance * Vector3.back;
+            StartCoroutine(Move(targetPos, totalSeconds));
+        }
+
+        if (!isMoving && Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Vector3 RotRight = new Vector3 (-90f, 0f, 90f);
+            transform.rotation = Quaternion.Euler(RotRight);
+            targetPos = transform.position + totalDistance * Vector3.right;
+            StartCoroutine(Move(targetPos, totalSeconds));
+        }
+
+        if (!isMoving && Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Vector3 RotLeft = new Vector3(-90f, 0f, -90f);
+            transform.rotation = Quaternion.Euler(RotLeft);
+            targetPos = transform.position + totalDistance * Vector3.left;
             StartCoroutine(Move(targetPos, totalSeconds));
         }
     }
