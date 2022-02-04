@@ -43,6 +43,12 @@ public class movement : MonoBehaviour
             Vector3 RotForward = new Vector3(-90f, 0f, 0f);
             transform.rotation = Quaternion.Euler(RotForward);
             targetPos = transform.position + totalDistance * Vector3.forward;
+
+            /*if(walls.isValidPosition(targetPos))
+            {
+            StartCoroutine(Move(targetPos, totalSeconds));
+            }
+            */
             StartCoroutine(Move(targetPos, totalSeconds));
         }
 
@@ -70,6 +76,8 @@ public class movement : MonoBehaviour
             StartCoroutine(Move(targetPos, totalSeconds));
         }
     }
+
+    
 
     private IEnumerator Move(Vector3 targetPosition, float duration)
     {
