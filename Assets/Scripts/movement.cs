@@ -9,32 +9,34 @@ public class movement : MonoBehaviour
     private float totalSeconds = 1; // Duración total del movimiento
     private float totalDistance = 1; // 4m a recorrer
     private bool isMoving;
+    private walls wallsscript;
 
     // Start is called before the first frame update
     void Start()
     {
         targetPos = transform.position;
+        wallsscript = GetComponent<walls>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Limites de Tablero
-        if(transform.position.x < -5.5)
+        if(transform.position.x < -5)
         {
-            transform.position = new Vector3(-5.5f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-5f, transform.position.y, transform.position.z);
         }
-        if (transform.position.x > 5.5)
+        if (transform.position.x > 5)
         {
-            transform.position = new Vector3(5.5f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(5f, transform.position.y, transform.position.z);
         }
-        if (transform.position.z < -0.5)
+        if (transform.position.z < 0)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -0.5f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         }
-        if (transform.position.z > 17.5)
+        if (transform.position.z > 17)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 17.5f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, 17f);
         }
 
         //Movimiento del Personaje
@@ -44,12 +46,12 @@ public class movement : MonoBehaviour
             transform.rotation = Quaternion.Euler(RotForward);
             targetPos = transform.position + totalDistance * Vector3.forward;
 
-            /*if(walls.isValidPosition(targetPos))
+            if(wallsscript.isValidPosition(targetPos))
             {
             StartCoroutine(Move(targetPos, totalSeconds));
             }
-            */
-            StartCoroutine(Move(targetPos, totalSeconds));
+            
+            //StartCoroutine(Move(targetPos, totalSeconds));
         }
 
         if (!isMoving && Input.GetKeyDown(KeyCode.DownArrow))
