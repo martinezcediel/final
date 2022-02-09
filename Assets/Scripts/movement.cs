@@ -59,7 +59,12 @@ public class movement : MonoBehaviour
             Vector3 RotBack = new Vector3(-90f, 0f, 180f);
             transform.rotation = Quaternion.Euler(RotBack);
             targetPos = transform.position + totalDistance * Vector3.back;
-            StartCoroutine(Move(targetPos, totalSeconds));
+           
+
+            if (wallsscript.isValidPosition(targetPos))
+            {
+                StartCoroutine(Move(targetPos, totalSeconds));
+            }
         }
 
         if (!isMoving && Input.GetKeyDown(KeyCode.RightArrow))
@@ -67,7 +72,12 @@ public class movement : MonoBehaviour
             Vector3 RotRight = new Vector3 (-90f, 0f, 90f);
             transform.rotation = Quaternion.Euler(RotRight);
             targetPos = transform.position + totalDistance * Vector3.right;
-            StartCoroutine(Move(targetPos, totalSeconds));
+           
+
+            if (wallsscript.isValidPosition(targetPos))
+            {
+                StartCoroutine(Move(targetPos, totalSeconds));
+            }
         }
 
         if (!isMoving && Input.GetKeyDown(KeyCode.LeftArrow))
@@ -75,7 +85,12 @@ public class movement : MonoBehaviour
             Vector3 RotLeft = new Vector3(-90f, 0f, -90f);
             transform.rotation = Quaternion.Euler(RotLeft);
             targetPos = transform.position + totalDistance * Vector3.left;
-            StartCoroutine(Move(targetPos, totalSeconds));
+           
+
+            if (wallsscript.isValidPosition(targetPos))
+            {
+                StartCoroutine(Move(targetPos, totalSeconds));
+            }
         }
     }
 
