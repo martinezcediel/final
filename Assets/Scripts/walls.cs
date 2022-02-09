@@ -11,8 +11,8 @@ public class walls : MonoBehaviour
     void Start()
     {
         GameObject[] wallArray = GameObject.FindGameObjectsWithTag("wall");
-        //GameObject.FindGameObjectstWithTag("wall");
-        //wallList.Add("w");
+
+        // Bajar la altura de wall para que coincida con la Target Position
         foreach(GameObject w in wallArray)
         {
             wallposition.Add(w.transform.position - 0.5f * Vector3.up);
@@ -20,22 +20,13 @@ public class walls : MonoBehaviour
     }
 
 
-
    public bool isValidPosition(Vector3 targetPos)
    { 
        if(wallposition.Contains(targetPos))
-       {
-            Debug.Log("he entrado");    
+       {  
             return false;
        }
-         return true;
+        return true;
 
    }
-   
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -9,7 +9,7 @@ public class movement : MonoBehaviour
     private float totalSeconds = 1; // Duración total del movimiento
     private float totalDistance = 1; // 4m a recorrer
     private bool isMoving;
-    private walls wallsscript;
+    private walls wallsscript; // Llamo al script de walls
 
     // Start is called before the first frame update
     void Start()
@@ -21,37 +21,22 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Limites de Tablero
-        if(transform.position.x < -5)
-        {
-            transform.position = new Vector3(-5f, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x > 5)
-        {
-            transform.position = new Vector3(5f, transform.position.y, transform.position.z);
-        }
-        if (transform.position.z < 0)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-        }
-        if (transform.position.z > 17)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 17f);
-        }
 
-        //Movimiento del Personaje
+        // Movimiento del Personaje
         if (!isMoving && Input.GetKeyDown(KeyCode.UpArrow))
         {
+            // Rotacion al moverse
             Vector3 RotForward = new Vector3(-90f, 0f, 0f);
             transform.rotation = Quaternion.Euler(RotForward);
             targetPos = transform.position + totalDistance * Vector3.forward;
 
+            // Si la pared NO en la Target Position, se inicia la Corutina 
             if(wallsscript.isValidPosition(targetPos))
             {
             StartCoroutine(Move(targetPos, totalSeconds));
             }
             
-            //StartCoroutine(Move(targetPos, totalSeconds));
+            
         }
 
         if (!isMoving && Input.GetKeyDown(KeyCode.DownArrow))
